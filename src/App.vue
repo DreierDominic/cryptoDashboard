@@ -1,21 +1,58 @@
-<script setup>
-// This starter template is using Vue 3 <script setup> SFCs
-// Check out https://v3.vuejs.org/api/sfc-script-setup.html#sfc-script-setup
-import HelloWorld from './components/HelloWorld.vue'
+<script>
+import { reactive, onMounted } from 'vue';
+import Card from './components/Card.vue';
+
+export default {
+  components: {
+    Card,
+  },
+  setup() {
+    let cryptos = reactive([]);
+
+    function loadData() {
+      fetch('https://api.coinlore.net/api/tickers/?limit=10')
+        .then(res => {
+            return res.json();
+          })
+          .then(apiData => {
+            cryptos.push(apiData.data);
+          })
+        .catch(error => console.log(error));
+    };
+
+    onMounted(() => {
+      loadData();
+    });
+
+    return {
+      cryptos,
+      loadData,
+    };
+  },
+};
 </script>
 
 <template>
-  <img alt="Vue logo" src="./assets/logo.png" />
-  <HelloWorld msg="Hello Vue 3 + Vite" />
+  <div class="container mx-auto py-10">
+    <h1 class="text-5xl mb-5">
+      CryptoDashboard
+    </h1>
+
+    <p>
+      Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.
+    </p>
+  </div>
+
+  <div class="bg-white py-20 h-screen rounded-t-3xl shadow-2xl">
+    <div class="container mx-auto">
+      <Card :data="crypto" v-for="crypto in cryptos[0]"/>
+    </div>
+  </div>
+
 </template>
 
 <style>
-#app {
-  font-family: Avenir, Helvetica, Arial, sans-serif;
-  -webkit-font-smoothing: antialiased;
-  -moz-osx-font-smoothing: grayscale;
-  text-align: center;
-  color: #2c3e50;
-  margin-top: 60px;
+body {
+  background-color: #87F6FF;
 }
 </style>
