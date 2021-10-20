@@ -1,6 +1,7 @@
 <script setup>
 import { reactive, onMounted } from 'vue';
 import Card from './components/Card.vue';
+import { RefreshIcon } from '@heroicons/vue/outline';
 
 let cryptos = reactive([[]]);
 let cryptosLimit = 20;
@@ -29,7 +30,7 @@ onMounted(() => {
 </script>
 
 <template>
-  <div class="dark:bg-gray-700">
+  <div class="dark:bg-gray-700 dark:text-white">
     <div class="bg-blue-200 text-blue-700 mb-10 px-5 md:px-0 dark:bg-blue-900 dark:text-blue-300">
       <div class="container mx-auto py-20">
         <h1 class="text-5xl mb-5">
@@ -42,8 +43,15 @@ onMounted(() => {
       </div>
     </div>
 
-    <div class="container mx-auto px-5 md:px-0 py-10 grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-4">
-      <Card :data="crypto" v-for="crypto in cryptos[0]"/>
+    <div class="container mx-auto px-5 md:px-0 py-10">
+
+      <div class="grid grid-cols-1">
+        <RefreshIcon class="h-8 w-8 cursor-pointer mb-10 justify-self-center" @click="loadData()" />
+      </div>
+
+      <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-4">
+        <Card :data="crypto" v-for="crypto in cryptos[0]"/>
+      </div>
     </div>
   </div>
 </template>
