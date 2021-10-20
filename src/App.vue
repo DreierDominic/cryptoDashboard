@@ -10,7 +10,7 @@ export default {
     let cryptos = reactive([]);
 
     function loadData() {
-      fetch('https://api.coinlore.net/api/tickers/?limit=10')
+      fetch('https://api.coinlore.net/api/tickers/?limit=20')
         .then(res => {
             return res.json();
           })
@@ -33,26 +33,23 @@ export default {
 </script>
 
 <template>
-  <div class="container mx-auto py-10">
-    <h1 class="text-5xl mb-5">
-      CryptoDashboard
-    </h1>
+  <div class="bg-blue-200 text-blue-700 mb-10 px-5 md:px-0">
+    <div class="container mx-auto py-20">
+      <h1 class="text-5xl mb-5">
+        CryptoDashboard
+      </h1>
 
-    <p>
-      Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.
-    </p>
+      <p class="lg:max-w-screen-md">
+        Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.
+      </p>
+    </div>
   </div>
 
-  <div class="bg-white py-20 h-screen rounded-t-3xl shadow-2xl">
-    <div class="container mx-auto">
-      <Card :data="crypto" v-for="crypto in cryptos[0]"/>
-    </div>
+  <div class="container mx-auto px-5 md:px-0 grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-4">
+    <Card :data="crypto" v-for="crypto in cryptos[0]"/>
   </div>
 
 </template>
 
 <style>
-body {
-  background-color: #87F6FF;
-}
 </style>

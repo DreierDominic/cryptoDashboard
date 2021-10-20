@@ -17,19 +17,18 @@ export default {
 </script>
 
 <template>
-  <div class="bg-gray-600 bg-opacity-25 hover:bg-opacity-50 p-5 mb-2 rounded-md">
+  <div class="bg-gray-100 hover:bg-gray-300 p-5 mb-2 rounded-md relative cursor-pointer">
+    <h1 class="text-1xl mb-4">
+      {{data.name}}
+    </h1>
 
-    <div class="grid grid-cols-2 flex items-center">
-      <h1 class="text-2xl">
-        {{data.name}}
-      </h1>
+    <h2 class="text-3xl">
+      $ {{data.price_usd}}
+    </h2>
 
-      <h2 class="text-5xl text-right">
-        $ {{data.price_usd}}
-
-        <TrendingUpIcon class="h-10 w-10 mb-2 inline text-green-500" v-if="Math.sign(Number(data.percent_change_1h)) > 0"/>
-        <TrendingDownIcon class="h-10 w-10 mb-2 inline text-red-500" v-if="Math.sign(Number(data.percent_change_1h)) < 0"/>
-      </h2>
+    <div class="absolute top-4 right-4">
+      <TrendingUpIcon class="h-6 w-6 inline text-green-500" v-if="Math.sign(Number(data.percent_change_1h)) > 0"/>
+      <TrendingDownIcon class="h-6 w-6 inline text-red-500" v-if="Math.sign(Number(data.percent_change_1h)) < 0"/>
     </div>
   </div>
 </template>
