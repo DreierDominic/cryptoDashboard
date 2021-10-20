@@ -1,44 +1,31 @@
-<script>
+<script setup>
 import { reactive, onMounted } from 'vue';
 import Card from './components/Card.vue';
 
-export default {
-  components: {
-    Card,
-  },
-  setup() {
-    let cryptos = reactive([[]]);
-    let cryptosLimit = 20;
+let cryptos = reactive([[]]);
+let cryptosLimit = 20;
 
-    function loadData() {
-      fetch(`https://api.coinlore.net/api/tickers/?limit=${cryptosLimit}`)
-        .then(res => {
-            return res.json();
-          })
-          .then(apiData => {
-            cryptos[0] = apiData.data;
-          })
-        .catch(error => console.log(error));
-    };
-
-    function createSkeletonLoader() {
-      for (let i = 1; i <= cryptosLimit; i++) {
-        cryptos[0].push({});
-      }
-    }
-
-    onMounted(() => {
-      createSkeletonLoader();
-      loadData();
-    });
-
-    return {
-      cryptos,
-      createSkeletonLoader,
-      loadData,
-    };
-  },
+function loadData() {
+  fetch(`https://api.coinlore.net/api/tickers/?limit=${cryptosLimit}`)
+    .then(res => {
+        return res.json();
+      })
+      .then(apiData => {
+        cryptos[0] = apiData.data;
+      })
+    .catch(error => console.log(error));
 };
+
+function createSkeletonLoader() {
+  for (let i = 1; i <= cryptosLimit; i++) {
+    cryptos[0].push({});
+  }
+}
+
+onMounted(() => {
+  createSkeletonLoader();
+  loadData();
+});
 </script>
 
 <template>

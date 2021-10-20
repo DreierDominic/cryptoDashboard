@@ -1,20 +1,9 @@
-<script>
+<script setup>
 import { TrendingUpIcon, TrendingDownIcon, MinusIcon } from '@heroicons/vue/outline';
 
-export default {
-  components: {
-    TrendingUpIcon,
-    TrendingDownIcon,
-    MinusIcon,
-  },
-
-  props: {
-    data: {
-      type: [Object],
-      required: true,
-    },
-  },
-};
+const props = defineProps({
+  data: Object,
+})
 </script>
 
 <template>
